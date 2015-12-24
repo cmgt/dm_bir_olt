@@ -1,0 +1,586 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	j7es_dad.asm
+	Object File:	j7es_dad.hex
+	List File:	j7es_dad.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:				;================================  Функции обработки ДАД
+    2:	  0000			CALC_DAD_VALUE:
+    3:	  0000	E5 00				mov	A, RAM_33
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+    4:	  0002	70 01				jnz	CALC_DAD_AVR
+    5:	  0004	22				ret
+    6:
+    7:	  0005			CALC_DAD_AVR:
+    8:	  0005	75 F0 40			mov	B, #40h
+    9:	  0008	A4				mul	AB
+   10:	  0009	85 00 00			mov	MD0, RAM_34
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   11:	  000C	85 00 00			mov	MD1, RAM_35
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   12:	  000F	85 00 00			mov	MD2, RAM_7F
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   13:	  0012	75 00 00			mov	MD3, #0
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   14:	  0015	F5 00				mov	MD4, A
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   15:	  0017	85 F0 00			mov	MD5, B
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   16:	  001A	00				nop
+   17:	  001B	00				nop
+   18:	  001C	00				nop
+   19:	  001D	00				nop
+   20:	  001E	00				nop
+   21:	  001F	00				nop
+   22:	  0020	AA 00				mov	R2, MD0		; Multiplication/Division Register 0
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+   23:	  0022	AB 00				mov	R3, MD1		; Multiplication/Division Register 1
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+   24:	  0024	E5 00				mov	A, MD2		; Multiplication/Division Register 2
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   25:	  0026	E5 00				mov	A, MD3		; Multiplication/Division Register 3
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   26:	  0028	E5 00				mov	A, MD4		; Multiplication/Division Register 4
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   27:	  002A	E5 00				mov	A, MD5		; Multiplication/Division Register 5
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   28:	  002C	90 60 9A			mov	DPTR, #609Ah	; Смещение ДАД
+   29:	  002F	E4				clr	A
+   30:	  0030	93				movc	A, @A+DPTR
+   31:	  0031	F8				mov	R0, A
+   32:	  0032	74 01				mov	A, #1
+   33:	  0034	93				movc	A, @A+DPTR
+   34:	  0035	F9				mov	R1, A
+   35:	  0036	E8				mov	A, R0
+   36:	  0037	2A				add	A, R2
+   37:	  0038	FA				mov	R2, A
+   38:	  0039	E9				mov	A, R1
+   39:	  003A	3B				addc	A, R3
+   40:	  003B	FB				mov	R3, A
+   41:	  003C	90 60 98			mov	DPTR, #6098h	; Наклон ДАД
+   42:	  003F	E4				clr	A
+   43:	  0040	93				movc	A, @A+DPTR
+   44:	  0041	F8				mov	R0, A
+   45:	  0042	74 01				mov	A, #1
+   46:	  0044	93				movc	A, @A+DPTR
+   47:	  0045	F9				mov	R1, A
+   48:	  0046	8A 00				mov	MD0, R2		; Multiplication/Division Register 0
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   49:	  0048	88 00				mov	MD4, R0		; Multiplication/Division Register 4
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   50:	  004A	8B 00				mov	MD1, R3		; Multiplication/Division Register 1
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   51:	  004C	89 00				mov	MD5, R1		; Multiplication/Division Register 5
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+ Line  I  Addr  Code            Source
+
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   52:	  004E	00				nop
+   53:	  004F	00				nop
+   54:	  0050	00				nop
+   55:	  0051	00				nop
+   56:	  0052	E5 00				mov	A, MD0		; Multiplication/Division Register 0
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   57:	  0054	A8 00				mov	R0, MD1		; Multiplication/Division Register 1
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+   58:	  0056	A9 00				mov	R1, MD2		; Multiplication/Division Register 2
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+   59:	  0058	E5 00				mov	A, MD3          ; Multiplication/Division Register 3
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+   60:	  005A	60 04				jz	CALC_DAD_1
+   61:	  005C	78 FF				mov	R0, #0FFh
+   62:	  005E	79 FF				mov	R1, #0FFh
+   63:
+   64:	  0060			CALC_DAD_1:
+   65:
+   66:	  0060	88 00				mov	DAD_VALUE_LO, R0
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   67:	  0062	89 00				mov	DAD_VALUE_HI, R1
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   68:
+   69:						;mov		DPTR, #0F876h
+   70:						;mov		A, R0
+   71:						;movx	@DPTR, A
+   72:						;inc		DPTR
+   73:						;mov		A, R1
+   74:						;movx	@DPTR, A
+   75:				;==========================  Вычисление температуры заряда
+   76:						GET_THR
+						       ^
+			  @@@@@ illegal statement syntax @@@@@
+
+   77:	  0064	FB				mov	R3, A
+   78:	  0065	90 00 00			mov	DPTR, #FCHARGE_ADDR
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+   79:	  0068	AA 00				mov	R2, RPM
+							    ^
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+ Line  I  Addr  Code            Source
+
+			  @@@@@ symbol not defined @@@@@
+
+   80:	  006A	12 00 00			call	Get3DCell
+							^
+			  @@@@@ symbol not defined @@@@@
+
+   81:	  006D	F5 F0				mov	B, A		; B-Register
+   82:	  006F	90 00 00			mov	DPTR, #FCHARGE_TWAT		; ТОЖ
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+   83:	  0072	E0				movx	A, @DPTR
+   84:	  0073	F8				mov	R0, A
+   85:	  0074	90 F9 3B			mov	DPTR, #0F93Bh					; ТВ
+   86:	  0077	E0				movx	A, @DPTR
+   87:	  0078	C3				clr	C
+   88:	  0079	98				subb	A, R0
+   89:	  007A	50 0C				jnc	CALC_DAD_2
+   90:	  007C	F9				mov	R1, A
+   91:	  007D	E4				clr	A
+   92:	  007E	C3				clr	C
+   93:	  007F	99				subb	A, R1
+   94:	  0080	A4				mul	AB
+   95:	  0081	E4				clr	A
+   96:	  0082	C3				clr	C
+   97:	  0083	95 F0				subb	A, B
+   98:	  0085	02 00 8B			jmp	CALC_DAD_3
+   99:
+  100:	  0088			CALC_DAD_2:
+  101:	  0088	A4				mul	AB
+  102:	  0089	E5 F0				mov	A, B
+  103:
+  104:	  008B			CALC_DAD_3:
+  105:	  008B	28				add	A, R0
+  106:	  008C	F8				mov	R0, A		; Добавление 10% от разницы с предыдущей Тз
+  107:	  008D	75 F0 1A			mov	B, #26
+  108:	  0090	90 00 00			mov	DPTR, #TCHARGE	; Тз
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+  109:	  0093	E0				movx	A, @DPTR
+  110:	  0094	C3				clr	C
+  111:	  0095	98				subb	A, R0
+  112:	  0096	50 0C				jnc	CALC_DAD_4
+  113:	  0098	F9				mov	R1, A
+  114:	  0099	E4				clr	A
+  115:	  009A	C3				clr	C
+  116:	  009B	99				subb	A, R1
+  117:	  009C	A4				mul	AB
+  118:	  009D	E4				clr	A
+  119:	  009E	C3				clr	C
+  120:	  009F	95 F0				subb	A, B		; B-Register
+  121:	  00A1	02 00 A7			jmp	CALC_DAD_5
+  122:
+  123:	  00A4			CALC_DAD_4:				; CODE XREF: code:B0ECj
+  124:	  00A4	A4				mul	AB
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 5
+
+
+
+ Line  I  Addr  Code            Source
+
+  125:	  00A5	E5 F0				mov	A, B		; B-Register
+  126:
+  127:	  00A7			CALC_DAD_5:
+  128:	  00A7	28				add	A, R0
+  129:	  00A8	F0				movx	@DPTR, A
+  130:	  00A9	F8				mov	R0, A
+  131:						FILL_TWAT_ARGS
+							      ^
+			  @@@@@ illegal statement syntax @@@@@
+
+  132:	  00AA	90 00 00			mov	DPTR, #FCHARGE_FCORR_ADDR	; Корректирующая функция для Тз
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+  133:	  00AD	12 00 00			call	code_AEBD
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  134:	  00B0	F5 F0				mov	B, A		; B-Register
+  135:	  00B2	E8				mov	A, R0
+  136:	  00B3	A4				mul	AB
+  137:	  00B4	30 E7 02			jnb	ACC.7, CALC_DAD_6 ; Accumulator
+  138:	  00B7	05 F0				inc	B		; B-Register
+  139:
+  140:	  00B9			CALC_DAD_6:
+  141:	  00B9	E5 F0				mov	A, B		; B-Register
+  142:	  00BB	90 00 00			mov	DPTR, #TCHARGE_FIN	; Тз после всех	коррекций
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+  143:	  00BE	F0				movx	@DPTR, A
+  144:				==
+				^
+			  @@@@@ illegal statement syntax @@@@@
+
+  145:				;==========================  Вычисление квантованного значения
+  146:	  00BF	85 00 00			mov	MD0, DAD_VALUE_LO
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  147:	  00C2	75 00 03			mov	MD4, #3
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  148:	  00C5	85 00 00			mov	MD1, DAD_VALUE_HI	; Multiplication/Division Register 1
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  149:	  00C8	75 00 00			mov	MD5, #0		; Multiplication/Division Register 5
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  150:	  00CB	00				nop
+  151:	  00CC	00				nop
+  152:	  00CD	00				nop
+  153:	  00CE	00				nop
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 6
+
+
+
+ Line  I  Addr  Code            Source
+
+  154:	  00CF	A8 00				mov	R0, MD0		; Multiplication/Division Register 0
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  155:	  00D1	A9 00				mov	R1, MD1		; Multiplication/Division Register 1
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  156:	  00D3	AA 00				mov	R2, MD2		; Multiplication/Division Register 2
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  157:	  00D5	AB 00				mov	R3, MD3		; Multiplication/Division Register 3
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  158:	  00D7	00				nop
+  159:	  00D8	88 00				mov	MD0, R0		; Multiplication/Division Register 0
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  160:	  00DA	89 00				mov	MD1, R1		; Multiplication/Division Register 1
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  161:	  00DC	8A 00				mov	MD2, R2		; Multiplication/Division Register 2
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  162:	  00DE	8B 00				mov	MD3, R3		; Multiplication/Division Register 3
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  163:	  00E0	75 00 05			mov	MD4, #5		; Multiplication/Division Register 4
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  164:	  00E3	75 00 00			mov	MD5, #0		; Multiplication/Division Register 5
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  165:	  00E6	00				nop
+  166:	  00E7	00				nop
+  167:	  00E8	00				nop
+  168:	  00E9	00				nop
+  169:	  00EA	00				nop
+  170:	  00EB	00				nop
+  171:	  00EC	A8 00				mov	R0, MD0		; Multiplication/Division Register 0
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  172:	  00EE	A9 00				mov	R1, MD1		; Multiplication/Division Register 1
+							    ^
+			  @@@@@ symbol not defined @@@@@
+
+  173:	  00F0	E5 00				mov	A, MD2		; Multiplication/Division Register 2
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 7
+
+
+
+ Line  I  Addr  Code            Source
+
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+  174:	  00F2	E5 00				mov	A, MD3		; Multiplication/Division Register 3
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+  175:	  00F4	E5 00				mov	A, MD4		; Multiplication/Division Register 4
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+  176:	  00F6	E5 00				mov	A, MD5		; Multiplication/Division Register 5
+							   ^
+			  @@@@@ symbol not defined @@@@@
+
+  177:	  00F8	90 5E F2			mov	DPTR, #5EF2h	; Минимум для квантования давления
+  178:	  00FB	E4				clr	A
+  179:	  00FC	93				movc	A, @A+DPTR
+  180:	  00FD	FA				mov	R2, A
+  181:	  00FE	05 82				inc		DPL
+  182:	  0100	93				movc	A, @A+DPTR
+  183:	  0101	FB				mov	R3, A
+  184:	  0102	12 00 00			call	SUB_R0R1_R2R3
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  185:	  0105	E4				clr	A
+  186:	  0106	40 18				jc	code_B247
+  187:	  0108	90 5E F4			mov	DPTR, #5EF4h	; Диапазон квантования давления
+  188:	  010B	E4				clr	A
+  189:	  010C	93				movc	A, @A+DPTR
+  190:	  010D	F5 F0				mov	B, A		; B-Register
+  191:	  010F	12 00 00			call	DIV_R0R1_8
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  192:	  0112	12 00 00			call	MUL_R0R1_B
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  193:	  0115	E9				mov	A, R1
+  194:	  0116	70 06				jnz	code_B245
+  195:	  0118	E8				mov	A, R0
+  196:	  0119	B4 F0 00			cjne	A, #0F0h, code_B243 ; 'Ё'
+  197:
+  198:	  011C			code_B243:
+  199:	  011C	40 02				jc	code_B247
+  200:
+  201:	  011E			code_B245:
+  202:	  011E	74 F0				mov	A, #0F0h ; 'Ё'
+  203:
+  204:	  0120			code_B247:
+  205:	  0120	90 F9 A0			mov	DPTR, #0F9A0h	; Текущее значение давления (ДАД)
+  206:	  0123	F0				movx	@DPTR, A
+  207:	  0124	22				ret
+  208:
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 8
+
+
+
+ Line  I  Addr  Code            Source
+
+  209:				;===================== Коррекция ТОЖ для модели Т заряда
+  210:	  0125			FCHARGE_TOG_CORRECTION:
+  211:						FILL_TWAT_ARGS
+							      ^
+			  @@@@@ illegal statement syntax @@@@@
+
+  212:	  0125	90 00 00			mov	DPTR, #FCHARGE_TOG_CONVERT_ADDR
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+  213:	  0128	12 00 00			call	code_AEBD
+							^
+			  @@@@@ symbol not defined @@@@@
+
+  214:	  012B	90 00 00			mov	DPTR, #FCHARGE_TOG_VALUE
+							       ^
+			  @@@@@ symbol not defined @@@@@
+
+  215:	  012E	F0				movx	@DPTR, A
+  216:	  012F	22				ret
+  217:				; End of function code_CA8B
+				^
+			  @@@@@ no END statement found @@@@@
+
+
+
+
+
+
+                     register banks used:  ---
+
+                     62 errors detected
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 9
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CALC_DAD_1			  CODE	    0060	  64
+CALC_DAD_2			  CODE	    0088	 100
+CALC_DAD_3			  CODE	    008B	 104
+CALC_DAD_4			  CODE	    00A4	 123
+CALC_DAD_5			  CODE	    00A7	 127
+CALC_DAD_6			  CODE	    00B9	 140
+CALC_DAD_AVR			  CODE	    0005	   7
+CALC_DAD_VALUE			  CODE	    0000	   2
+CODE_B243			  CODE	    011C	 198
+CODE_B245			  CODE	    011E	 201
+CODE_B247			  CODE	    0120	 204
+CY				  BIT	      D7
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+FCHARGE_TOG_CORRECTION		  CODE	    0125	 210
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+
+ASEM-51 V1.3                                        Copyright (c) 2002 by W.W. Heinz                                         PAGE 10
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+WR				  BIT	      B6
